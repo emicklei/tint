@@ -565,13 +565,13 @@ func appendString(buf *buffer, s string, quote, color bool) {
 	quote = quote && needsQuoting(s)
 	switch {
 	case color && quote:
-		s = strconv.Quote(s)
+		//s = strconv.Quote(s)
 		s = strings.ReplaceAll(s, `\x1b`, string(ansiEsc))
-		buf.WriteString(s)
+		writeString(buf, s)
 	case !color && quote:
 		*buf = strconv.AppendQuote(*buf, s)
 	default:
-		buf.WriteString(s)
+		writeString(buf, s)
 	}
 }
 
